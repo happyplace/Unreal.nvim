@@ -492,9 +492,13 @@ function Stage_UbtGenCmd()
                     -- rewrite rsp contents
                     if not shouldSkipFile then
                         local rspfile = io.open(newrsppath, "w")
-                        local rspcontent = ExtractRSP(rsppath)
-                        rspfile:write(rspcontent)
-                        rspfile:close()
+			if rspfile then
+				local rspcontent = ExtractRSP(rsppath)
+				if rspcontent then
+					rspfile:write(rspcontent)
+				end
+				rspfile:close()
+			end
                     end
                     coroutine.yield()
 
